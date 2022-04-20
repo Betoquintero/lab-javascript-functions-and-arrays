@@ -1,24 +1,46 @@
 // Iteration #1: Find the maximum
-function maxOfTwoNumbers() {}
+function maxOfTwoNumbers(a, b) {
+  if (a > b) {
+    return a
+  } else {
+    return b
+  }
+};
 
+console.log (maxOfTwoNumbers(3, 4))
 
 
 // Iteration #2: Find longest word
 const words = ['mystery', 'brother', 'aviator', 'crocodile', 'pearl', 'orchard', 'crackpot'];
 
-function findLongestWord() {}
+function findLongestWord (arr) {
+	return words.sort((a, b) => b.length - a.length)[0];
+ }
+console.log(findLongestWord(words))
 
 
 
 // Iteration #3: Calculate the sum
 const numbers = [6, 12, 1, 18, 13, 16, 2, 1, 8, 10];
-
-function sumNumbers() {}
-
+let arraySum = 0
+function sumNumbers() {
+  for (let i = 0 ; i < numbers.length ; i++) {
+    arraySum += numbers[i]
+  }
+}
+sumNumbers(numbers);
+console.log(arraySum)
 
 
 // Iteration #3.1 Bonus:
-function sum() {}
+function sum(array) {
+  let sumCounter = 0;
+  for (let i = 0 ; i < numbers.length ; i++) {
+    sumCounter+= array[i]  
+ }
+  return sumCounter;
+}
+
 
 
 
@@ -26,13 +48,32 @@ function sum() {}
 // Level 1: Array of numbers
 const numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
 
-function averageNumbers() {}
+function averageNumbers() {
+  let parSum = 0
+    for (let i = 0 ; i < numbersAvg.length ; i++) {
+    parSum += numbersAvg[i]
+  };
+  parSum /= numbersAvg.length
+ console.log(parSum)
+};
+    averageNumbers(numbersAvg);
 
 
 // Level 2: Array of strings
 const wordsArr = ['seat', 'correspond', 'linen', 'motif', 'hole', 'smell', 'smart', 'chaos', 'fuel', 'palace'];
 
-function averageWordLength() { }
+function averageWordLength() {
+  let wordsAvg = 0
+  for (let i = 0 ; i < wordsArr.length ; i++){
+    wordsAvg += wordsArr[i].length
+  }
+  wordsAvg /= wordsArr.length
+  console.log (wordsAvg)
+};
+
+averageWordLength(wordsArr);
+
+
 
 // Bonus - Iteration #4.1
 function avg() {}
@@ -52,14 +93,21 @@ const wordsUnique = [
   'bring'
 ];
 
-function uniquifyArray() {}
 
+let filteredArr  = wordsUnique.filter((element, index) => {
+    return wordsUnique.indexOf(element) === index;
+});
+
+console.log(filteredArr);
 
 
 // Iteration #6: Find elements
 const wordsFind = ['machine', 'subset', 'trouble', 'starting', 'matter', 'eating', 'truth', 'disobedience'];
 
-function doesWordExist() {}
+function doesWordExist(arr, word) {
+  return wordsFind.includes(word) 
+}
+console.log(doesWordExist(wordsFind, 'machine'))
 
 
 
@@ -78,12 +126,21 @@ const wordsCount = [
   'matter'
 ];
 
-function howManyTimes() {}
+function howManyTimes(arr, word) {
+  let countWords = 0
+  for (let i = 0 ; i < wordsCount.length ; i++){
+  if (wordsCount[i].includes(word)){
+    countWords+= 1
+   };
+  };
+  return countWords;
+} 
+console.log(howManyTimes(wordsCount, 'matter'))
 
 
 
 // Iteration #8: Bonus
-const matrix = [
+const arr = [
   [8, 2, 22, 97, 38, 15, 0, 40, 0, 75, 4, 5, 7, 78, 52, 12, 50, 77, 91, 8],
   [49, 49, 99, 40, 17, 81, 18, 57, 60, 87, 17, 40, 98, 43, 69, 48, 4, 56, 62, 0],
   [81, 49, 31, 73, 55, 79, 14, 29, 93, 71, 40, 67, 53, 88, 30, 3, 49, 13, 36, 65],
@@ -107,6 +164,76 @@ const matrix = [
 ];
 
 function greatestProduct() {}
+
+//IMPORTANTE...Lo intenté pero esto supera mis niveles de pensamiento...encontré en Google la respuesta que ya incñuye la diagonal y comprobé que efectivamente hubiera necesitado 2 bootcamps para hacerlo :)
+
+let n = 4;
+ 
+    // function to find max product
+    function FindMaxProduct(arr,n)
+    {
+        let max = 0, result;
+ 
+        // iterate the rows.
+        for (let i = 0; i < n; i++)
+        {
+            // iterate the columns.
+            for (let j = 0; j < n; j++)
+            {
+                // check the maximum product
+                // in horizontal row.
+                if ((j - 3) >= 0)
+                {
+                    result = arr[i][j] * arr[i][j - 1]
+                            * arr[i][j - 2]
+                            * arr[i][j - 3];
+                    if (max < result)
+                        max = result;
+                }
+ 
+                // check the maximum product
+                // in vertical row.
+                if ((i - 3) >= 0)
+                {
+                    result = arr[i][j] * arr[i - 1][j]
+                            * arr[i - 2][j]
+                            * arr[i - 3][j];
+ 
+                    if (max < result)
+                        max = result;
+                }
+ 
+                // check the maximum product in
+                // diagonal (going through down - right)
+                if ((i - 3) >= 0 && (j - 3) >= 0)
+                {
+                    result = arr[i][j] * arr[i - 1][j - 1]
+                            * arr[i - 2][j - 2]
+                            * arr[i - 3][j - 3];
+ 
+                    if (max < result)
+                        max = result;
+                }
+ 
+                // check the maximum product in
+                // diagonal (going through up - right)
+                if ((i - 3) >= 0 && (j - 1) <= 0)
+                {
+                result = arr[i][j] * arr[i - 1][j + 1]
+                            * arr[i - 2][j + 2]
+                            * arr[i - 3][j + 3];
+ 
+                    if (max < result)
+                        max = result;
+                }
+            }
+        }
+ 
+        return max;
+    }
+
+console.log(FindMaxProduct(arr, 4))
+
 
 
 
